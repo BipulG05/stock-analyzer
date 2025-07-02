@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stocks by Sector</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+label, select, button {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+select, button {
+  padding: 5px 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  color: #000;  /* Ensures text is visible */
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #000;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #e0f0ff;
+}
+
+p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 20px;
+}
+
+  </style>
+</head>
+<body>
+
+  <h2>Stocks by Sector</h2>
+
+  <form method="post">
+    <label for="sector">Select Sector:</label>
+    <select name="sector" id="sector">
+      {% for sector in sectors %}
+        <option value="{{ sector }}" {% if selected == sector %}selected{% endif %}>{{ sector }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+
+  {% if stocks %}
+    <h3>Showing stocks for: {{ selected }}</h3>
+    <table>
+      <tr>
+        <th>Symbol</th>
+        <th>Company</th>
+        <th>Price</th>
+        <th>Change (%)</th>
+        <th>High</th>
+        <th>Low</th>
+      </tr>
+      {% for stock in stocks %}
+        <tr>
+          <td>{{ stock.symbol }}</td>
+          <td>{{ stock.companyName }}</td>
+          <td>{{ stock.lastPrice }}</td>
+          <td>{{ stock.pChange }}</td>
+          <td>{{ stock.dayHigh }}</td>
+          <td>{{ stock.dayLow }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No data available.</p>
+  {% endif %}
+
+</body>
+</html>

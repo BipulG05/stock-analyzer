@@ -1,0 +1,14 @@
+<h2>Search Stock</h2>
+<form method="post">
+  Symbol: <input name="symbol" required>
+  <button type="submit">Search</button>
+</form>
+
+{% if data %}
+  <h3>Details for {{ data['symbol'] }}</h3>
+  <ul>
+    {% for k, v in data.items() %}
+      <li><strong>{{ k }}:</strong> {{ v }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}

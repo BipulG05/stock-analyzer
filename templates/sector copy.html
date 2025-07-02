@@ -1,0 +1,14 @@
+<h2>Stocks by Sector</h2>
+<form method="post">
+  Sector: <input name="sector" required>
+  <button type="submit">Submit</button>
+</form>
+
+{% if stocks %}
+<table border="1">
+  <tr><th>Symbol</th><th>Details</th></tr>
+  {% for stock in stocks %}
+    <tr><td>{{ stock['symbol'] }}</td><td>{{ stock['info'] }}</td></tr>
+  {% endfor %}
+</table>
+{% endif %}
